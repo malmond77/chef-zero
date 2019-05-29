@@ -92,6 +92,13 @@ if options[:log_file]
   ChefZero::Log.init(options[:log_file])
 end
 
+# This is a one line change to test the principle behind configuring MaxClients
+# in WEBrick. The better version is
+# https://github.com/malmond77/chef-zero/tree/maxclients
+# This one file can be installed in a different location to the RPM, and can be
+# specified in taste-tester's configuration file.
+WEBrick::Config::HTTP[:MaxClients] = 1000
+
 server = ChefZero::Server.new(options)
 
 if options[:daemon]
